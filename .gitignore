@@ -1,0 +1,9 @@
+node_modules
+dist
+dev-dist
+*.log
+# Datensicherungen und PDFs nie ins Repository hochladen
+KabaMontage-Sicherung_*.json
+*.pdf
+*.tsbuildinfo
+.claude

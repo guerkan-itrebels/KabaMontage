@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 340" width="900" height="340">
+  <defs>
+    <clipPath id="innen"><path d="M186 220 L288 109 L288 220 Z"/></clipPath>
+  </defs>
+  <g fill="#0f1c2e">
+    <!-- Hammer -->
+    <path d="M108 62 C130 22 180 18 222 38 L246 50 L238 80 L212 72 L200 60 C172 46 140 48 108 62 Z"/>
+    <path d="M200 62 L226 76 L128 244 C124 250 116 252 110 248 L104 244 C98 240 97 233 100 227 Z"/>
+    <path d="M36 228 C38 205 52 190 72 182 L88 192 L62 232 C56 236 40 236 36 228 Z"/>
+    <!-- Keil mit Streifen -->
+    <path d="M156 234 L300 78 L300 234 Z"/>
+  </g>
+  <g clip-path="url(#innen)" stroke="#ffffff" stroke-width="13">
+    <line x1="160" y1="232" x2="360" y2="15"/>
+    <line x1="190" y1="232" x2="390" y2="15"/>
+    <line x1="220" y1="232" x2="420" y2="15"/>
+    <line x1="250" y1="232" x2="450" y2="15"/>
+    <line x1="280" y1="232" x2="480" y2="15"/>
+  </g>
+  <text x="322" y="234" font-family="Arial Black, Arial, Helvetica, sans-serif" font-weight="900" font-size="196" textLength="556" lengthAdjust="spacingAndGlyphs" fill="#0f1c2e">KABA</text>
+  <text x="182" y="318" font-family="Arial, Helvetica, sans-serif" font-weight="700" font-size="52" textLength="550" lengthAdjust="spacingAndGlyphs" fill="#2b3642">MONTAGE SERVICE</text>
+</svg>

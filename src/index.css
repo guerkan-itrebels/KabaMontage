@@ -1,0 +1,92 @@
+@import 'tailwindcss';
+
+:root {
+  --bg: #efede7;
+  --karte: #ffffff;
+  --karte-2: #f6f5f1;
+  --text: #0e1621;
+  --leise: #4a5563;
+  --rand: #c9cdd3;
+  --marke: #0f1c2e;
+  --akzent: #f2a900;
+  --akzent-hover: #dc9a00;
+  --auf-akzent: #0f1c2e;
+  --gefahr: #b42318;
+  --ok: #1d7a3e;
+  --warn-bg: #fff4d6;
+  --warn-text: #6b4a00;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0a111b;
+    --karte: #142031;
+    --karte-2: #1b2a3e;
+    --text: #f3f5f8;
+    --leise: #aab4c2;
+    --rand: #2f4058;
+    --marke: #0f1c2e;
+    --gefahr: #ff6b5e;
+    --ok: #4cc27a;
+    --warn-bg: #3a2c05;
+    --warn-text: #ffd978;
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-karte: var(--karte);
+  --color-karte-2: var(--karte-2);
+  --color-text: var(--text);
+  --color-leise: var(--leise);
+  --color-rand: var(--rand);
+  --color-marke: var(--marke);
+  --color-akzent: var(--akzent);
+  --color-akzent-hover: var(--akzent-hover);
+  --color-auf-akzent: var(--auf-akzent);
+  --color-gefahr: var(--gefahr);
+  --color-ok: var(--ok);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-text: var(--warn-text);
+  --font-sans: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, system-ui, sans-serif;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+.zahlen {
+  font-variant-numeric: tabular-nums;
+}
+
+.sicher-unten {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.sicher-oben {
+  padding-top: env(safe-area-inset-top);
+}
+
+:focus-visible {
+  outline: 3px solid var(--akzent);
+  outline-offset: 2px;
+}
