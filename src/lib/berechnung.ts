@@ -111,6 +111,20 @@ export function berechneSummen(positionen: Position[], modus: SteuerModus): Bele
   };
 }
 
+/**
+ * Noch änderbare Belege (Entwürfe, Angebote) folgen immer der aktuellen
+ * Kleinunternehmer-Einstellung. Festgeschriebene Rechnungen bleiben unverändert.
+ */
+export function mitAktuellerSteuer<T extends Pick<Beleg, 'typ' | 'status' | 'kleinunternehmer' | 'reverseCharge'>>(
+  b: T,
+  kleinunternehmer: boolean,
+): T {
+  const festgeschrieben = b.typ === 'rechnung' && b.status !== 'entwurf';
+  if (festgeschrieben) return b;
+  if (b.kleinunternehmer === kleinunternehmer && !(kleinunternehmer && b.reverseCharge)) return b;
+  return { ...b, kleinunternehmer, reverseCharge: kleinunternehmer ? false : b.reverseCharge };
+}
+
 export function belegSummen(b: Pick<Beleg, 'positionen' | 'kleinunternehmer' | 'reverseCharge'>) {
   return berechneSummen(b.positionen, {
     kleinunternehmer: b.kleinunternehmer,

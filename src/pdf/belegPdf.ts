@@ -1,7 +1,7 @@
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { dateiAusgeben, herunterladen } from '../db/backup';
-import { belegSummen } from '../lib/berechnung';
+import { belegSummen, mitAktuellerSteuer } from '../lib/berechnung';
 import { euroZuCent } from '../lib/geld';
 import { betrag, dateinameSicher, datum, euro, zahl } from '../lib/format';
 import { belegHinweise, belegTitel, leistungszeitraumText, zahlungsText } from '../lib/texte';
@@ -56,7 +56,8 @@ export function pdfDateiname(b: Beleg, kunde?: Kunde): string {
   return `${belegTitel(b)}_${nr}_${dateinameSicher(name) || 'Kunde'}.pdf`;
 }
 
-export async function erzeugeBelegPdf(beleg: Beleg, kundeAktuell: Kunde | undefined, firmaAktuell: Firmenprofil): Promise<Blob> {
+export async function erzeugeBelegPdf(belegRoh: Beleg, kundeAktuell: Kunde | undefined, firmaAktuell: Firmenprofil): Promise<Blob> {
+  const beleg = mitAktuellerSteuer(belegRoh, firmaAktuell.kleinunternehmer);
   // Festgeschriebene Belege nutzen die eingefrorenen Daten
   const firma = beleg.firmaSnapshot ?? firmaAktuell;
   const kunde = beleg.kundeSnapshot ?? kundeAktuell;

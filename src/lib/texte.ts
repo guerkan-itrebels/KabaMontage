@@ -3,7 +3,7 @@ import { skontoBetragCent } from './berechnung';
 import { datum, euro, plusTage } from './format';
 import type { Beleg, Kunde } from './typen';
 
-export const HINWEIS_19 = 'Gemäß § 19 UStG wird keine Umsatzsteuer berechnet.';
+export const HINWEIS_19 = 'Gemäß § 19 Abs. 1 UStG wird keine Umsatzsteuer berechnet.';
 export const HINWEIS_13B = 'Steuerschuldnerschaft des Leistungsempfängers (§ 13b UStG).';
 export const HINWEIS_AUFBEWAHRUNG =
   'Hinweis: Als Privatperson sind Sie gemäß § 14b Abs. 1 S. 5 UStG verpflichtet, diese Rechnung zwei Jahre lang aufzubewahren.';

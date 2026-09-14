@@ -4,7 +4,7 @@ import {
   angebotZuRechnung, duplizieren, entwurfLoeschen, festschreiben, nummerVorschau, setzeBezahlt, speichereEntwurf, stornieren,
 } from '../db/belege';
 import { db, neueId } from '../db/db';
-import { belegSummen } from '../lib/berechnung';
+import { belegSummen, mitAktuellerSteuer } from '../lib/berechnung';
 import { datum, euro, heute, plusTage } from '../lib/format';
 import { belegHinweise, belegTitel, faelligAm, zahlungsText } from '../lib/texte';
 import type { Beleg, Kunde, Position } from '../lib/typen';
@@ -80,6 +80,14 @@ export function BelegEditor({ id }: { id: string }) {
     setFehler([]);
   };
   const setPositionen = (f: (p: Position[]) => Position[]) => aendern((x) => ({ ...x, positionen: f(x.positionen) }));
+
+  // Kleinunternehmer-Einstellung auf änderbare Belege übertragen (auch nachträglich umgeschaltet)
+  useEffect(() => {
+    if (!b || !firma) return;
+    if (mitAktuellerSteuer(b, firma.kleinunternehmer) !== b) {
+      aendern((x) => mitAktuellerSteuer(x, firma.kleinunternehmer));
+    }
+  }, [b, firma?.kleinunternehmer]);
 
   if (b === undefined || !firma) return null;
   if (b === null) {

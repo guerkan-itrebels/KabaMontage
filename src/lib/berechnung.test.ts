@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { berechnePosition, berechneSummen, flaecheSumme, skontoBetragCent } from './berechnung';
+import { berechnePosition, berechneSummen, flaecheSumme, mitAktuellerSteuer, skontoBetragCent } from './berechnung';
 import { euroZuCent, prozentVon, rundeKaufmaennisch } from './geld';
 import { dateinameSicher, euro, parseZahl } from './format';
 import { belegHinweise, effektiverStatus, formatiereNummer, HINWEIS_13B, HINWEIS_19, zahlungsText } from './texte';
@@ -140,6 +140,15 @@ describe('Belegsummen', () => {
     const storno = berechneSummen(positionen.map((p) => ({ ...p, menge: -p.menge })), normal);
     expect(storno.bruttoCent).toBe(-original.bruttoCent);
     expect(storno.steuerCent).toBe(-original.steuerCent);
+  });
+
+  it('Kleinunternehmer nachträglich eingeschaltet: Entwurf folgt, festgeschriebene Rechnung nicht', () => {
+    const alt = { typ: 'rechnung' as const, status: 'entwurf' as const, kleinunternehmer: false, reverseCharge: true };
+    expect(mitAktuellerSteuer(alt, true)).toMatchObject({ kleinunternehmer: true, reverseCharge: false });
+    const fertig = { ...alt, status: 'offen' as const };
+    expect(mitAktuellerSteuer(fertig, true)).toBe(fertig);
+    const angebot = { ...alt, typ: 'angebot' as const, status: 'offen' as const };
+    expect(mitAktuellerSteuer(angebot, true).kleinunternehmer).toBe(true);
   });
 
   it('leerer Beleg', () => {
